@@ -7,6 +7,8 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using BuildingBlocks.Messaging.MassTransit;
+using Microsoft.FeatureManagement;
 
 namespace Ordering.Application
 {
@@ -20,6 +22,8 @@ namespace Ordering.Application
                 config.AddOpenBehavior(typeof(ValidationBehavior<,>));
                 config.AddOpenBehavior(typeof(LoggingBehavior<,>));
             });
+            services.AddFeatureManagement();
+            services.AddMessageBroker(configuration, Assembly.GetExecutingAssembly());
 
             return services;
         }
